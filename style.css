@@ -22,9 +22,10 @@ body {
     object-fit: contain;
     }
 .title {
-    font-size: 3em;
+    font-size: 4em;
     font-weight: bold;
     margin: 0;
+    font-family: 'Bruno Ace';
 }
 .selection-banner {
     height: 6vh;
