@@ -82,8 +82,15 @@ body {
     color: #8d8c8c;
     text-align: right;
 }
-.subheading{
+.subheading {
     font-size: 1.5em;
     font-style: italic;
     -webkit-text-stroke: 0.01px black;
+}
+
+.game-canvas {
+    background-color: black;
+    width: 400px;
+    height: 600px;
+    margin: 0 auto;
 }
