@@ -6,7 +6,7 @@ body {
 }
 .title-banner {
     height: 20vh;
-    background-image: url("webbtitle.png");
+    background-image: url("webbtitle.jpg");
     background-size: cover;
     color: #ff8c00;
     display: flex;
