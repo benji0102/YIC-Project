@@ -17,17 +17,45 @@ function displayQuiz(divID) {
                 '<input type="text" id="q4">' +
                 '<p>Question 5: Who is the current president of the United States?</p>' +
                 '<input type="text" id="q5">' +
-                '<button onclick="gradeQuiz()">Submit</button>' +
+                '<button class="submit" onclick="gradeQuiz()">Submit Answers</button>' +
                 '<div id="score"></div>';
 
     // set the HTML content of the quiz container div
     quizContainer.innerHTML = quizHtml;
 }
 
+function gradeQuiz() {
+    var correctAnswers = ["4", "Paris", "Harper Lee", "Mercury", "Joe Biden"];
+    var userAnswers = [];
+    var numCorrect = 0;
+  
+    // get the user's answers
+    userAnswers.push(document.getElementById("q1").value);
+    userAnswers.push(document.getElementById("q2").value);
+    userAnswers.push(document.getElementById("q3").value);
+    userAnswers.push(document.getElementById("q4").value);
+    userAnswers.push(document.getElementById("q5").value);
+  
+    // compare user's answers to correct answers
+    for (var i = 0; i < correctAnswers.length; i++) {
+      var answerField = document.getElementById("q" + (i+1));
+      if (userAnswers[i] === correctAnswers[i]) {
+        answerField.style.backgroundColor = "green";
+        numCorrect++;
+      } else {
+        answerField.style.backgroundColor = "red";
+      }
+    }
+  
+    // display the score
+    var scoreDiv = document.getElementById("score");
+    scoreDiv.innerHTML = "You got " + numCorrect + " out of " + correctAnswers.length + " correct.";
+  }
+ 
 function displayGame(divID) {
 
     console.log("displayGame called");
-    
+
     // Define the canvas element
     const canvas = document.getElementById('gameboxOptics');
 
@@ -55,7 +83,7 @@ function displayGame(divID) {
     // Define the laser generator
     const laserGenerator = {
     x: canvas.width - 50,
-    y: canvas.height - 50,
+    y: canvas.height -50,
     width: 50,
     height: 50,
     color: 'grey',
