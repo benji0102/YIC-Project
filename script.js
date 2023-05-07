@@ -56,96 +56,70 @@ function displayGame(divID) {
 
     console.log("displayGame called");
 
-    // Define the canvas element
-    const canvas = document.getElementById('gameboxOptics');
+    // Constants
+    const canvasWidth = 600;
+    const canvasHeight = 400;
+    const laserGeneratorWidth = 20;
+    const laserGeneratorHeight = 10;
+    const laserColor = "red";
+    const mirrorSize = 30;
+    const mirrorRotationAngle = Math.PI / 4;
 
-    // Set the canvas dimensions to fill the screen
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // Variables
+    let canvas, ctx, laserStart, mirrors = [];
 
-    // Get the context for the canvas
-    const ctx = canvas.getContext('2d');
-
-    // Define the game state
-    const gameState = {
-    mirrors: [],
-    };
-
-    // Define the laser beam
-    const laserBeam = {
-    x: canvas.width - 100,
-    y: canvas.height - 50,
-    width: 100,
-    height: 3,
-    color: 'red',
-    };
-
-    // Define the laser generator
-    const laserGenerator = {
-    x: canvas.width - 50,
-    y: canvas.height -50,
-    width: 50,
-    height: 50,
-    color: 'grey',
-    };
-
-    // Define the mirror object
-    class Mirror {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.width = 20;
-        this.height = 40;
-        this.angle = 0;
+    // Functions
+    function drawLaser() {
+    ctx.strokeStyle = laserColor;
+    ctx.beginPath();
+    ctx.moveTo(laserStart.x, laserStart.y);
+    ctx.lineTo(canvasWidth, laserStart.y);
+    ctx.stroke();
     }
 
-    draw() {
-        ctx.save();
-        ctx.translate(this.x, this.y);
-        ctx.rotate(this.angle);
-        ctx.fillStyle = 'silver';
-        ctx.fillRect(-this.width / 2, -this.height / 2, this.width, this.height);
-        ctx.restore();
+    function drawMirror(x, y) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(mirrorRotationAngle);
+    ctx.strokeRect(-mirrorSize / 2, -mirrorSize / 2, mirrorSize, mirrorSize);
+    ctx.restore();
     }
 
-    rotate(angle) {
-        this.angle += angle;
-        this.angle %= 2 * Math.PI;
-    }
+    function update() {
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    drawLaser();
+    mirrors.forEach(mirror => drawMirror(mirror.x, mirror.y));
     }
 
-    // Add event listener for mouse click
-    canvas.addEventListener('click', (event) => {
-    const x = event.clientX;
-    const y = event.clientY;
+    // Initialization
+    canvas = document.getElementById("game-canvas");
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+    ctx = canvas.getContext("2d");
 
-    // Create a new mirror object and add it to the game state
-    const newMirror = new Mirror(x, y);
-    gameState.mirrors.push(newMirror);
+    ctx.fillStyle = "gray";
+    ctx.fillRect(0, canvasHeight - laserGeneratorHeight, laserGeneratorWidth, laserGeneratorHeight);
+    laserStart = { x: laserGeneratorWidth / 2, y: canvasHeight - laserGeneratorHeight / 2 };
+
+    drawLaser();
+
+    // Event listeners
+    canvas.addEventListener("mousedown", event => {
+        if (event.button === 0) { // left click
+            mirrors.push({ x: event.offsetX, y: event.offsetY });
+        } else if (event.button === 2) { // right click
+            mirrors.pop();
+        }
+        update();
     });
 
-    // Render function
-    function render() {
-    // Clear the canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Draw the laser beam
-    ctx.fillStyle = laserBeam.color;
-    ctx.fillRect(laserBeam.x, laserBeam.y, laserBeam.width, laserBeam.height);
-
-    // Draw the laser generator
-    ctx.fillStyle = laserGenerator.color;
-    ctx.fillRect(laserGenerator.x, laserGenerator.y, laserGenerator.width, laserGenerator.height);
-
-    // Draw the mirrors
-    gameState.mirrors.forEach((mirror) => {
-        mirror.draw();
+    canvas.addEventListener("click", event => {
+        mirrors.forEach(mirror => {
+            if (event.offsetX >= mirror.x - mirrorSize / 2 && event.offsetX <= mirror.x + mirrorSize / 2 &&
+                event.offsetY >= mirror.y - mirrorSize / 2 && event.offsetY <= mirror.y + mirrorSize / 2) {
+                mirrorRotationAngle += Math.PI / 4;
+                update();
+            }
+        });
     });
-
-    // Request the next frame
-    requestAnimationFrame(render);
-    }
-
-    // Call the render function to start the game loop
-    render();
 }
