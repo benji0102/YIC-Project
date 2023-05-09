@@ -1,5 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+from matplotlib.animation import PillowWriter
+
 
 # Define constants
 G = 4*np.pi**2    # Gravitational constant in AU^3/yr^2
@@ -15,8 +18,8 @@ a_planet = 1.0     # Semi-major axis of planet's orbit in AU
 period = 1.0       # Orbital period of planet in years
 
 # Define time step and number of steps
-dt = 0.005          # Time step in years
-num_steps = 1000   # Number of time steps
+dt = 0.01          # Time step in years
+num_steps = 200   # Number of time steps
 
 # Define initial position and velocity of planet
 x = np.array([a_planet, 0.0])
@@ -34,34 +37,43 @@ def update_planet(x, v, dt):
 x_traj = np.zeros((num_steps, 2))
 x_traj[0] = x
 
-# Loop through time steps and update position of planet
-for i in range(1, num_steps):
+# Define function to animate plot
+def animate(i):
+
+    global x, v, x_traj
+    
+    if i == 0 or len(x_traj[:i, :]) == 0:
+        max_val = 1.0
+    else:
+        max_val = a_planet*1.1
+
     # Update position and velocity of planet
     x, v = update_planet(x, v, dt)
-    
-    # Store new position of planet in trajectory array
+
+    # Add current position to trajectory
     x_traj[i] = x
-    
-    # Update plot every 10 time steps
-    if i % 10 == 0:
-        plt.clf()
-        plt.plot(x_traj[:i, 0], x_traj[:i, 1], 'b.')
-        plt.plot(0, 0, 'y*', markersize=20)
-        
-        # Set x and y limits with padding
-        max_val = np.amax(x_traj[:i, :])
-        min_val = np.amin(x_traj[:i, :])
-        plt.xlim(min_val - 0.1, max_val + 0.1)
-        plt.ylim(min_val - 0.1, max_val + 0.1)
-        
-        plt.gca().set_aspect('equal', adjustable='box')
-        plt.title('Orbit of planet around host star')
-        plt.xlabel('x (AU)')
-        plt.ylabel('y (AU)')
-        plt.pause(0.01)
+
+    # Clear previous plot and plot current position and trajectory
+    plt.clf()
+    plt.xlim(-max_val, max_val)
+    plt.ylim(-max_val, max_val)
+    plt.plot(0, 0, 'o', color='orange', markersize=10*M_star)
+    plt.plot(x[0], x[1], 'o', color='blue', markersize=10*M_planet)
+    plt.plot(x_traj[:i, 0], x_traj[:i, 1], '-', color='gray')
+
+    # Set title and axis labels
+    plt.title('Planet Orbit')
+    plt.xlabel('x (AU)')
+    plt.ylabel('y (AU)')
 
 # Adjust padding between subplots and figure edges
 plt.tight_layout()
+
+# Create animation
+ani = FuncAnimation(plt.gcf(), animate, frames=num_steps, interval=10)
+
+# Save animation as GIF file
+ani.save('orbit.gif', writer=PillowWriter(fps=10))
 
 # Show final plot
 plt.show()
