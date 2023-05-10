@@ -9,7 +9,6 @@ G = 4*np.pi**2 # Gravitational constant in AU^3/yr^2
 # Prompt user for values of host star and planet properties
 M_star = float(input("Enter the mass of the host star (in Solar masses): "))
 R_star = float(input("Enter the radius of the host star (in Solar radii): "))
-
 M_planet = float(input("Enter the mass of the planet (in Earth masses): "))
 R_planet = float(input("Enter the radius of the planet (in Earth radii): "))
 a_planet = float(input("Enter the semi-major axis of the planet's orbit (in AU): "))
