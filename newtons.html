@@ -26,16 +26,41 @@
 		<p>
 	</div>
 
-	
 	<script src="script.js"></script>
-	<div id="quizBoxNewton" class="content-box">
+	<div id="quizboxNewton" class="interaction-box">
 	</div>
+
 	<script>
 		// Call the function to display the quiz in the div
 		displayQuiz("quizboxNewton");
 	</script>
+
+<div class="content-box">
+	<div id="input-container" class="interaction-box">
+		<label for="box1-velocity">Enter the initial velocity for box 1 (m/s) :</label>
+		<input type="number" id="box1-velocity" name="box1-velocity" required><br>
+	
+		<label for="box2-velocity">Enter the initial velocity for box 2 (m/s) :</label>
+		<input type="number" id="box2-velocity" name="box2-velocity" required><br>
+	
+		<label for="box1-mass">Enter the mass for box 1 (kg) :</label>
+		<input type="number" id="box1-mass" name="box1-mass" required><br>
+	
+		<label for="box2-mass">Enter the mass for box 2 (kg) :</label>
+		<input type="number" id="box2-mass" name="box2-mass" required><br>
+	
+		<button id="start-game-btn" class="submit" onclick="boxGame()">Start Simulation</button>
+	</div>
+	
+	<div id="canvas-container">
+		<canvas id="canvas" class="gamebox" width="600px" height="400px"></canvas>
+	</div>
+</div>
+
 	<footer class="footer">
 		<p>2023 Benjamin Dadswell, The University of Kent</p>
 	</footer>
+
+
 </body>
 </html>

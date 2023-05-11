@@ -1,7 +1,7 @@
 
 // A function to generate a quiz to test the user on their knowledge.
 
-function displayQuiz(divID) {
+function displayQuiz() {
 
     console.log("displayQuiz called");
 
@@ -57,123 +57,139 @@ function gradeQuiz() {
     scoreDiv.innerHTML = "You got " + numCorrect + " out of " + correctAnswers.length + " correct.";
 }
  
-
 function boxGame() {
-  // Define the canvas and context
-  const canvas = document.querySelector('#canvas');
-  const ctx = canvas.getContext('2d');
 
-  // Define the boxes and floor
-  const box1 = {
-    x: 100,
-    y: canvas.height / 2 - 25,
-    mass: 1,
-    velocity: 0,
-    momentum: 0,
-    color: 'red'
-  };
+    console.log("box called");
 
-  const box2 = {
-    x: canvas.width - 100,
-    y: canvas.height / 2 - 25,
-    mass: 1,
-    velocity: 0,
-    momentum: 0,
-    color: 'blue'
-  };
+      // Define the canvas and context
+      const canvas = document.querySelector('#canvas');
+      const ctx = canvas.getContext('2d');
 
-  const floor = {
-    x: 0,
-    y: canvas.height / 2 + 25,
-    width: canvas.width,
-    height: 1,
-    color: 'black'
-  };
+      // Define the boxes and floor
+      const box1 = {
+        x: 100,
+        y: canvas.height / 2 - 25,
+        mass: 1,
+        velocity: 0,
+        momentum: 0,
+        color: 'red'
+      };
 
-  // Define the function to update the boxes
-  function update() {
-// Move the boxes
-box1.x += box1.velocity;
-box2.x -= box2.velocity;
+      const box2 = {
+        x: canvas.width - 100,
+        y: canvas.height / 2 - 25,
+        mass: 1,
+        velocity: 0,
+        momentum: 0,
+        color: 'blue'
+      };
 
-// Check for collision
-if (box1.x + 50 >= box2.x) {
-const totalMass = box1.mass + box2.mass;
-const box1Momentum = box1.mass * box1.velocity;
-const box2Momentum = box2.mass * box2.velocity;
-const totalMomentum = box1Momentum + box2Momentum;
+      const floor = {
+        x: 0,
+        y: canvas.height / 2 + 25,
+        width: canvas.width,
+        height: 1,
+        color: 'black'
+      };
 
-box1.velocity = -1* ((totalMomentum - box2Momentum) / totalMass);
-box2.velocity = -1* ((totalMomentum - box1Momentum) / totalMass);
+      // Define the function to update the boxes
+      function update() {
+  // Move the boxes
+  box1.x += box1.velocity;
+  box2.x += box2.velocity;
 
-collision = true;
-}
+  // Check for collision
+  if (box1.x + 50 >= box2.x) {
+    const totalMass = box1.mass + box2.mass;
+    const box1Momentum = box1.mass * box1.velocity;
+    const box2Momentum = box2.mass * box2.velocity;
+    const totalMomentum = box1Momentum + box2Momentum;
 
-// Check for off-screen
-if (box1.x > canvas.width || box2.x < 0) {
-// Reset the game
-box1.x = 100;
-box1.velocity = 0;
-box2.x = canvas.width - 100;
-box2.velocity = 0;
-}
+    box1.velocity = -1* ((totalMomentum - box2Momentum) / totalMass);
+    box2.velocity = -1* ((totalMomentum - box1Momentum) / totalMass);
 
-// Calculate momentum
-box1.momentum = box1.mass * box1.velocity;
-box2.momentum = box2.mass * box2.velocity;
-}
-
-  // Define the function to draw the boxes
-  function draw() {
-    // Clear the canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Draw the floor
-    ctx.fillStyle = floor.color;
-    ctx.fillRect(floor.x, floor.y, floor.width, floor.height);
-    
-    // Draw the boxes
-    ctx.fillStyle = box1.color;
-    ctx.fillRect(box1.x, box1.y, 50, 50);
-
-    ctx.fillStyle = box2.color;
-    ctx.fillRect(box2.x, box2.y, 50, 50);
-
-    // Display the resulting momentums upon collision
-    if (collision) {
-      ctx.fillStyle = 'black';
-      ctx.font = '20px Arial';
-
-      // Display velocities
-      ctx.fillText(`Box 1 velocity: ${box1.velocity.toFixed(2)}kgm/s`, 50, 130);
-      ctx.fillText(`Box 2 velocity: ${-1*box2.velocity.toFixed(2)}kgm/s`, 50, 160);
-
-
-      // Display momentums
-      ctx.fillText(`Box 1 momentum: ${box1.momentum.toFixed(2)}kgm/s`, 50, 50);
-      ctx.fillText(`Box 2 momentum: ${-1*box2.momentum.toFixed(2)}kgm/s`, 50, 80);
-
-  }
-}
-
-  // Define the function to start the game
-  function start() {
-    // Get the initial velocities from the user
-    box1.velocity = Number(prompt('Enter the initial velocity for box 1 (m/s) :'));
-    box2.velocity = Number(prompt('Enter the initial velocity for box 2 (m/s) :'));
-    box1.mass = Number(prompt('Enter the mass for box 1 (kg) :'));
-    box2.mass = Number(prompt('Enter the mass for box 2 (kg) :'));
-
-    // Start the game loop
-    setInterval(() => {
-      update();
-      draw();
-    }, 10);
+    collision = true;
   }
 
-  // Start the game
-  start();
+  // Check for off-screen
+  if (box1.x > canvas.width || box2.x < 0) {
+    // Reset the game
+    box1.x = 100;
+    box1.velocity = 0;
+    box2.x = canvas.width - 100;
+    box2.velocity = 0;
+  }
+
+  // Calculate momentum
+  box1.momentum = box1.mass * box1.velocity;
+  box2.momentum = box2.mass * box2.velocity;
 }
+
+      // Define the function to draw the boxes
+      function draw() {
+        // Clear the canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          // Set the background color of the canvas to white
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Set the border of the canvas to black
+        ctx.strokeStyle = 'black';
+        ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+        // Draw the floor
+        ctx.fillStyle = floor.color;
+        ctx.fillRect(floor.x, floor.y, floor.width, floor.height);
+        
+        // Draw the boxes
+        ctx.fillStyle = box1.color;
+        ctx.fillRect(box1.x, box1.y, 50, 50);
+
+        ctx.fillStyle = box2.color;
+        ctx.fillRect(box2.x, box2.y, 50, 50);
+
+        // Display the resulting momentums upon collision
+        if (collision) {
+          ctx.fillStyle = 'black';
+          ctx.font = '20px Arial';
+
+          // Display velocities
+          ctx.fillText(`Box 1 velocity: ${box1.velocity.toFixed(2)}m/s`, 50, 130);
+          ctx.fillText(`Box 2 velocity: ${box2.velocity.toFixed(2)}m/s`, 50, 160);
+
+
+          // Display momentums
+          ctx.fillText(`Box 1 momentum: ${box1.momentum.toFixed(2)}kgm/s`, 50, 50);
+          ctx.fillText(`Box 2 momentum: ${box2.momentum.toFixed(2)}kgm/s`, 50, 80);
+
+          // Display total momentum
+          ctx.fillText(`Total momentum: ${(box1.momentum + box2.momentum).toFixed(2)}kgm/s`, 50, 300);
+
+      }
+    }
+
+      // Define the function to start the game
+      function start() {
+        // Get the initial velocities from the user
+        box1.velocity = Number(document.getElementById('box1-velocity').value);
+        box2.velocity = -1*(Number(document.getElementById('box2-velocity').value));
+        box1.mass = Number(document.getElementById('box1-mass').value);
+        box2.mass = Number(document.getElementById('box1-mass').value);
+
+        // Start the game loop
+        setInterval(() => {
+          update();
+          draw();
+        }, 10);
+      }
+
+      // Start the game
+      start();
+}
+
+
+
 
 /* The following script was an attempt at a laser game when the website was designed to address Optics, another area of Physics.
 Summarised, the game drew a canvas on screen within which was a laser generator in the bottom left corner, emitting a laser beam. 

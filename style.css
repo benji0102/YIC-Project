@@ -20,7 +20,7 @@ body {
     margin-right: 0;
     max-height: 100%;
     object-fit: contain;
-    }
+}
 .title {
     font-size: 4em;
     font-weight: bold;
@@ -68,11 +68,28 @@ body {
     text-align: justify;
     -webkit-text-stroke: 0.2px black;
 }
+
+.interaction-box {
+    background-color: #403f3f; 
+    padding: 20px; 
+    border-radius: 20px; 
+    margin-top: 40px;
+    margin: 20px;
+    color: #ff8c00;
+    text-align: justify;
+    -webkit-text-stroke: 0.2px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .content-heading {
     text-align: center;
     font-size: 2em;
     font-style: italic;
 }
+
 .footer {
     position: relative;
     bottom: 0;
@@ -88,10 +105,14 @@ body {
     -webkit-text-stroke: 0.01px black;
 }
 
-.game-canvas {
-    background-color: black;
-    width: 600px;
-    height: 400px;
+.gamebox {
+    width: 60vw;
+    height: 40vw;
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin:0 auto;
 }
 
 .submit{
@@ -109,4 +130,12 @@ body {
     font-family: 'Bruno Ace';
     -webkit-text-stroke: 0.01px black;
     display: flex;
-  }
+}
+
+.canvas-container{
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin:0 auto;
+}
