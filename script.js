@@ -9,17 +9,18 @@ function displayQuiz() {
     var quizContainer = document.getElementById("quizboxNewton");
 
     // create the quiz HTML code as a string
-    var quizHtml = '<h2>Quiz</h2>' +
-                '<p>Question 1: What is 2+2?</p>' +
-                '<input type="text" id="q1">' +
-                '<p>Question 2: What is the capital of France?</p>' +
-                '<input type="text" id="q2">' +
-                '<p>Question 3: Who wrote the novel "To Kill a Mockingbird"?</p>' +
-                '<input type="text" id="q3">' +
-                '<p>Question 4: Which planet is closest to the sun?</p>' +
-                '<input type="text" id="q4">' +
-                '<p>Question 5: Who is the current president of the United States?</p>' +
-                '<input type="text" id="q5">' +
+    var quizHtml = '<h2 class="content-heading">Quiz</h2>' +
+                '<h3 class="subheading">For the following questions, take gravitational force F = g = 9.81 m/s^2.</h3>' +
+                '<p>Question 1: A book of mass 2 kg is placed on a table. What force is exerted on the book by the table?</p>' +
+                '<div><input type="text" id="q1"> N</div>' +
+                '<p>Question 2: A hockey puck of mass 0.2 kg is initially at rest on a frictionless ice rink. A constant force of 2 N is applied to the puck. What is the acceleration of the puck?</p>' +
+                '<div><input type="text" id="q2"> ms^-2</div>' +
+                '<p>Question 3: A stationary ball is dropped from the top of a 10m tall ladder. What will its velocity be after 0.5s? (Hint: for constant acceleration, final velocity = initial velocity + (acceleration x time))</p>' +
+                '<div><input type="text" id="q3"> m/s</div>' +
+                '<p>Question 4: Two people stand either side of a large block of stone with mass 300kg. The person on the left is pushing with a force of 200N. The person on the right is pushing in the opposite direction with a force of 50N. What is the acceleration of the stone? Assume the people have neglible (0) mass.</p>' +
+                '<div><input type="text" id="q4"> ms^-2</div>' +
+                '<p>Question 5: A 500 kg car is traveling at a constant speed of 20 m/s. What is the net force acting on the car?</p>' +
+                '<div><input type="text" id="q5"> N</div>' +
                 '<button class="submit" onclick="gradeQuiz()">Submit Answers</button>' +
                 '<div id="score"></div>';
 
@@ -30,7 +31,7 @@ function displayQuiz() {
 // A function to grade the quiz and display the score.
 
 function gradeQuiz() {
-    var correctAnswers = ["4", "Paris", "Harper Lee", "Mercury", "Joe Biden"];
+    var correctAnswers = ["19.62", "10", "4.905", "0.5", "0"];
     var userAnswers = [];
     var numCorrect = 0;
   
@@ -59,7 +60,7 @@ function gradeQuiz() {
  
 function boxGame() {
 
-    console.log("box called");
+    console.log("boxGame called");
 
       // Define the canvas and context
       const canvas = document.querySelector('#canvas');
@@ -91,6 +92,9 @@ function boxGame() {
         height: 1,
         color: 'black'
       };
+
+      collision = false;
+    
 
       // Define the function to update the boxes
       function update() {
@@ -169,16 +173,29 @@ function boxGame() {
       }
     }
 
+      let gameInstance;
+
       // Define the function to start the game
       function start() {
+
+
+        // Clear the previous game
+        clearInterval(gameInstance);
+        // Clear the canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Reset collision
+        collision=false
+
         // Get the initial velocities from the user
         box1.velocity = Number(document.getElementById('box1-velocity').value);
         box2.velocity = -1*(Number(document.getElementById('box2-velocity').value));
         box1.mass = Number(document.getElementById('box1-mass').value);
         box2.mass = Number(document.getElementById('box1-mass').value);
 
+
+
         // Start the game loop
-        setInterval(() => {
+        gameInstance = setInterval(() => {
           update();
           draw();
         }, 10);
@@ -199,9 +216,8 @@ in the top right corner of the canvas. Problems ensued when rendering the game w
 a HTML container and in the placement and removal of the mirrors. The game was not completed due to time constraints.
 */
 
-/*
 
-function displayGame(divID) {
+function displayGame() {
 
     console.log("displayGame called");
 
@@ -212,6 +228,8 @@ function displayGame(divID) {
     const laserGeneratorHeight = 10;
     const laserColor = "red";
     const mirrorSize = 30;
+
+    // To rotate on click rotation angle must be an array to cycle through on click
     const mirrorRotationAngle = Math.PI / 4;
 
     // Variables
@@ -227,21 +245,32 @@ function displayGame(divID) {
     }
 
     function drawMirror(x, y) {
-    ctx.save();
-    ctx.translate(x, y);
-    ctx.rotate(mirrorRotationAngle);
-    ctx.strokeRect(-mirrorSize / 2, -mirrorSize / 2, mirrorSize, mirrorSize);
-    ctx.restore();
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(mirrorRotationAngle);
+    
+      // draw the mirror as a grey rectangle
+      ctx.fillStyle = 'gray';
+      ctx.fillRect(-mirrorSize / 2, -mirrorSize / 2, mirrorSize, mirrorSize / 8);
+    
+      ctx.restore();
     }
 
     function update() {
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    drawLaser();
-    mirrors.forEach(mirror => drawMirror(mirror.x, mirror.y));
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    
+      ctx.fillStyle = "gray";
+      ctx.fillRect(0, canvasHeight - laserGeneratorHeight, laserGeneratorWidth, laserGeneratorHeight);
+      laserStart = { x: laserGeneratorWidth / 2, y: canvasHeight - laserGeneratorHeight / 2 };
+    
+      drawLaser();
+      mirrors.forEach(mirror => drawMirror(mirror.x, mirror.y));
+
     }
+    
 
     // Initialization
-    canvas = document.getElementById("game-canvas");
+    canvas = document.getElementById("opticsgame-canvas");
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
     ctx = canvas.getContext("2d");
@@ -254,23 +283,27 @@ function displayGame(divID) {
 
     // Event listeners
     canvas.addEventListener("mousedown", event => {
-        if (event.button === 0) { // left click
+        if (event.button === 0) { // left click. Need to add rotation upon further left clicks
             mirrors.push({ x: event.offsetX, y: event.offsetY });
-        } else if (event.button === 2) { // right click
+        } else if (event.button === 2) { // right click to remove last 
             mirrors.pop();
         }
         update();
     });
 
+    // Prevent right click menu
+    canvas.addEventListener("contextmenu", function(event) {
+      event.preventDefault();
+    });
+
+    // Spawn mirrors
     canvas.addEventListener("click", event => {
         mirrors.forEach(mirror => {
             if (event.offsetX >= mirror.x - mirrorSize / 2 && event.offsetX <= mirror.x + mirrorSize / 2 &&
                 event.offsetY >= mirror.y - mirrorSize / 2 && event.offsetY <= mirror.y + mirrorSize / 2) {
-                mirrorRotationAngle += Math.PI / 4;
+                mirrorRotationAngle += Math.PI / 4; // Need this to cycle through 45 degree increments
                 update();
             }
         });
     });
 }
-
-*/

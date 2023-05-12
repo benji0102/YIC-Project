@@ -45,6 +45,7 @@ def animate(i):
 
     global x, v, x_traj
     
+    # This was necessary to get the animation to work
     if i == 0 or len(x_traj[:i, :]) == 0:
         max_val = 1.0
     else:

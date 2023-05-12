@@ -16,18 +16,57 @@
 		<a href="home.html" class="selection">Home</a>
 		<a href="newtons.html" class="selection">Newton's Laws</a>
 		<a href="kepler.html" class="selection">Kepler's Laws</a>
+		<a href="deprecated.html" class="selection">Deprecated</a>
         <a href="attributions.html" class="selection">Attributions</a>
 		<a href="info.html" class="selection">Info</a>
 	</div>
-	<div class="content-box">
+
+	<div class ="content-box">
+
 		<h2 class="content-heading">Newton's Laws</h2>
 		<h3 class="subheading"><u>Background</u></h3>
-		<p>Newton's laws of motion are three physical laws that, together, laid the foundation for classical mechanics. They describe the relationship between a body and the forces acting upon it, and its motion in response to those forces. Newton's first law is also known as the law of inertia, which states that an object at rest will stay at rest and an object in motion will stay in motion at a constant velocity unless acted upon by an unbalanced force. Newton's second law is also known as the law of acceleration, which states that the rate of change of momentum of a body is directly proportional to the force applied, and occurs in the same direction as the applied force. Newton's third law is also known as the law of action and reaction, which states that for every action there is an equal and opposite reaction.</p>
 		<p>
-	</div>
+			Newton's laws of motion are three physical laws that, together, laid the foundation for classical mechanics. They describe the relationship between a body and the forces acting upon it, and its motion in response to those forces. Understanding Newton’s laws can give great insight to the world around us and can lead to understanding other physical concepts, such as the conservation of momentum.
+			</p>
+		<p>
+
+		<h3 class="subheading"><u>Newton's Three Laws of Motion</u></h3>
+		
+		
+		<h4 class="subsubheading">First Law:</h4>
+		<p>Also known as the law of inertia, the first law states that an object at rest will remain at rest, and an object in motion will continue in 
+		uniform motion in a straight line unless acted upon by a net external force.</p>
+		<p>Mathematically, this can be expressed as:</p>
+		<img src="https://latex.codecogs.com/svg.latex?\sum\vec{F}=0\Rightarrow\vec{a}=\vec{0}" title="\sum\vec{F}=0\Rightarrow\vec{a}=\vec{0}" />
+		<p>where <img src="https://latex.codecogs.com/svg.latex?\vec{F}" title="\vec{F}" /> represents the net external force acting on the object, 
+		<img src="https://latex.codecogs.com/svg.latex?\vec{a}" title="\vec{a}" /> represents the resulting acceleration, and 
+		<img src="https://latex.codecogs.com/svg.latex?\vec{0}" title="\vec{0}" /> represents the absence of acceleration (this is important when considering the conservation of momentum later).</p>
+		
+		<h4 class="subsubheading">Second Law:</h4>
+		<p>The second law of motion relates the net force acting on an object to its acceleration. It states that the acceleration of an
+		object is directly proportional to the net external force acting on it and inversely proportional to its mass.</p>
+		<p>Mathematically, this can be expressed as:</p>
+		<img src="https://latex.codecogs.com/svg.latex?\vec{F}_{net}=m\vec{a}" title="\vec{F}_{net}=m\vec{a}" />
+		<p>where <img src="https://latex.codecogs.com/svg.latex?\vec{F}_{net}" title="\vec{F}_{net}" /> represents the net external force 
+		acting on the object, <img src="https://latex.codecogs.com/svg.latex?m" title="m" /> represents the mass of the object, and 
+		<img src="https://latex.codecogs.com/svg.latex?\vec{a}" title="\vec{a}" /> represents the resulting acceleration.</p>
+		
+		<h4 class="subsubheading">Third Law:</h4>
+		<p>The third law of motion states that for every action, there is an equal and opposite reaction. This means that when two objects interact, 
+		the forces they exert on each other are equal in magnitude and opposite in direction.</p>
+		<p>Mathematically, this can be expressed as:</p>
+		<img src="https://latex.codecogs.com/svg.latex?\vec{F}_{A\rightarrow{B}}=-\vec{F}_{B\rightarrow{A}}" 
+		title="\vec{F}_{A\rightarrow{B}}=-\vec{F}_{B\rightarrow{A}}" />
+		<p>where <img src="https://latex.codecogs.com/svg.latex?\vec{F}_{A\rightarrow{B}}" title="\vec{F}_{A\rightarrow{B}}" /> 
+		represents the force exerted by object A on object B, and <img src="https://latex.codecogs.com/svg.latex?\vec{F}_{B\rightarrow{A}}" title="\vec{F}_{B\rightarrow{A}}" />
+		represents the force exerted by object B on object A.</p>
+		</p>
+		</div>
 
 	<script src="script.js"></script>
-	<div id="quizboxNewton" class="interaction-box">
+	<div class="content-box">
+		<div id="quizboxNewton" class="interaction-box">
+		</div>
 	</div>
 
 	<script>
@@ -35,8 +74,37 @@
 		displayQuiz("quizboxNewton");
 	</script>
 
+<div class = "content-box">
+	<h2 class="content-heading">Conservation of Momentum</h2>
+	<p>The conservation of momentum is a fundamental principle in physics that states that the total momentum of an isolated system remains constant 
+	if no external forces act on it. This principle can be derived from Newton's Laws of Motion.</p>
+
+	<p>Newton's Second Law states that the net force acting on an object is equal to the rate of change of its momentum:
+	<p><img src="https://latex.codecogs.com/svg.latex?F=\frac{d(mv)}{dt}" title="F=\frac{d(mv)}{dt}"/></p>
+	where F is the net force, m is the mass of the object, v is its velocity, and t is time. If there are no external forces
+	 acting on a system of objects, then the total momentum of the system is conserved:
+	<p><img src="https://latex.codecogs.com/svg.latex?\sum{mv}=\text{constant}" title="\sum{mv}=\text{constant}"/></p>
+
+	<p>This means that the total momentum of the system before a collision or interaction is equal to the total momentum of the 
+	system after the collision or interaction. This principle is often used in the analysis of collisions between objects. For example, 
+	consider a simple case of two objects colliding and bouncing off of each other. Before the collision, the two objects have individual 
+	momenta:</p>
+
+	<p><img src="https://latex.codecogs.com/svg.latex?p_1=m_1v_1" title="p_1=m_1v_1"/></p>
+	<p><img src="https://latex.codecogs.com/svg.latex?p_2=m_2v_2" title="p_2=m_2v_2"/></p>
+	
+	<p>Knowing that momentum is conserved, we can say that the total momentum <img src="https://latex.codecogs.com/svg.latex?p_T" title="p_T"/> is:</p>
+	<p><img src="https://latex.codecogs.com/svg.latex?p_T=m_1v_1+m_2v_2" title="p_T=m_1v_1+m_2v_2"/></p>
+	<p>After the collision, the two objects bounce off of each other and move with velocities:</p>
+	<p><img src="https://latex.codecogs.com/svg.latex?v_1=\frac{p_T-m_2v_2}{m_1}" title="v_1=\frac{p_T-m_2v_2}{m_1}" /></p>
+	<p><img src="https://latex.codecogs.com/svg.latex?v_2=\frac{p_T-m_1v_1}{m_2}" title="v_2=\frac{p_T-m_1v_1}{m_2}" /></p>
+	<p>This equation tells us the velocities of the objects after the collision, based on their masses and velocities before the collision and the 
+	conserved momenta of the collision.</p>
+	</div>
+
 <div class="content-box">
 	<div id="input-container" class="interaction-box">
+		<h2 class="content-heading">Conservation of Momentum Simulation</h2>
 		<label for="box1-velocity">Enter the initial velocity for box 1 (m/s) :</label>
 		<input type="number" id="box1-velocity" name="box1-velocity" required><br>
 	

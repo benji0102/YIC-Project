@@ -16,10 +16,29 @@
 		<a href="home.html" class="selection">Home</a>
 		<a href="newtons.html" class="selection">Newton's Laws</a>
 		<a href="kepler.html" class="selection">Kepler's Laws</a>
-		<a href="deprecated.html" class="selection">Deprecated</a>
+        <a href="deprecated.html" class="selection">Deprecated</a>
         <a href="attributions.html" class="selection">Attributions</a>
 		<a href="info.html" class="selection">Info</a>
 	</div>
+
+
+    <div class="content-box">
+        <h1 class="content-heading">Abandoned game</h1>
+        <p class="content-text">This game was abandoned due to a reduction in scope of the website, as well as constraints on time and knowledge.
+            The website was originally designed to cover broader areas of Physics, including Optics, where this game would have been relevant.
+            Please see script.js's displayGame() function for the code and an explanation of the game's principles.
+        </p>
+    </div>
+	<script src="script.js"></script>
+	<div class="interaction-box">
+        <canvas id="opticsgame-canvas" width="600" height="400"></canvas>
+	</div>
+
+	<script>
+		// Call the function to display the game in the div
+		displayGame("opticsgame-canvas");
+	</script>
+
 <footer class="footer">
     <p>2023 Benjamin Dadswell, The University of Kent</p>
 </footer>

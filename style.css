@@ -88,6 +88,8 @@ body {
     text-align: center;
     font-size: 2em;
     font-style: italic;
+    font-family: 'Bruno Ace';
+    text-shadow: 0 0 5px #fff, 0 0 10px #ff0, 0 0 20px #f00;
 }
 
 .footer {
@@ -103,6 +105,17 @@ body {
     font-size: 1.5em;
     font-style: italic;
     -webkit-text-stroke: 0.01px black;
+    font-family: 'Bruno Ace';
+    
+}
+
+.subsubheading {
+    font-weight: bold;
+    font-size: 1.2em;
+    font-style: italic;
+    -webkit-text-stroke: 0.01px black;
+    font-family: 'Bruno Ace';
+    
 }
 
 .gamebox {
