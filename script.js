@@ -229,6 +229,7 @@ function displayGame() {
     const laserColor = "red";
     const mirrorSize = 30;
 
+
     // To rotate on click rotation angle must be an array to cycle through on click
     const mirrorRotationAngle = Math.PI / 4;
 
@@ -273,6 +274,8 @@ function displayGame() {
     canvas = document.getElementById("opticsgame-canvas");
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
+    canvas.style.border = "1px solid white";
+    canvas.style.backgroundColor = "black";
     ctx = canvas.getContext("2d");
 
     ctx.fillStyle = "gray";

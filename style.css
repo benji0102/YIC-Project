@@ -71,6 +71,7 @@ body {
 
 .interaction-box {
     background-color: #403f3f; 
+    border: 1px solid #ffffff;
     padding: 20px; 
     border-radius: 20px; 
     margin-top: 40px;
